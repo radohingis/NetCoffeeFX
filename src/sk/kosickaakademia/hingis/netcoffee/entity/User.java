@@ -1,27 +1,25 @@
 package sk.kosickaakademia.hingis.netcoffee.entity;
 
 public class User {
-    String name;
-    String password;
+    private String name;
+    private String password;
+    private int userID;
 
-    public User(String name, String password) {
+    public User(int userID, String name, String password) {
         this.name = name;
         this.password = password;
+        this.userID = userID;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public int getUserID() {
+        return userID;
     }
 }
