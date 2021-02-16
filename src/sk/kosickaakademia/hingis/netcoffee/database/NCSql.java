@@ -12,10 +12,11 @@ import java.util.Properties;
 public class NCSql {
     private final String insertUserQuery = "insert into user (login, password) values (?, ?)";
     private final String loginUserQuery = "select * from user where login like ? and password like ?";
+    private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
 
     public Connection connect() {
         Connection connection;
-        try{
+        try {
             Properties properties = new Properties();
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("db.properties");
             properties.load(inputStream);
@@ -35,14 +36,14 @@ public class NCSql {
     }
 
     public boolean insertNewUser(String login, String password) {
-        if(login.equals("") ||
+        if (login.equals("") ||
                 password.equals("") ||
                 password.length() < 6)
             return false;
 
         String hashedPwd = new Util().getMd5(password);
 
-        try (Connection connection = connect()){
+        try (Connection connection = connect()) {
             if (connection != null) {
                 PreparedStatement preparedStatement = connection.prepareStatement(insertUserQuery);
                 preparedStatement.setString(1, login);
@@ -57,27 +58,27 @@ public class NCSql {
                     return true;
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return true;
     }
 
-    public User loginUser (String login, String password){
-        if(login.equals("") ||
+    public User loginUser(String login, String password) {
+        if (login.equals("") ||
                 password.equals("") ||
                 password.length() < 6)
             return null;
 
         String hashedPwd = new Util().getMd5(password);
 
-        try (Connection connection = connect()){
+        try (Connection connection = connect()) {
             if (connection != null) {
                 PreparedStatement preparedStatement = connection.prepareStatement(loginUserQuery);
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, hashedPwd);
                 ResultSet resultset = preparedStatement.executeQuery();
-                if(resultset.next()){
+                if (resultset.next()) {
                     int userID = resultset.getInt("id");
                     return new User(userID, login, hashedPwd);
                 } else {
@@ -85,9 +86,43 @@ public class NCSql {
                     return null;
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
+    public boolean changePassword(String login, String oldPassword, String newPassword, String newPasswordTest) {
+        if(oldPassword.equals(newPassword) || oldPassword.equals(newPasswordTest)){
+            System.out.println("New password must be different than old one");
+        }
+        if (!oldPassword.equals("")) {
+            User user = loginUser(login, oldPassword);
+            if(!user.getPassword().equals("")){
+                try (Connection connection = connect()) {
+                    if (connection != null) {
+                        PreparedStatement preparedStatement = connection.prepareStatement(updatePasswordQuery);
+                        if (newPassword.equals(newPasswordTest)) {
+                            preparedStatement.setString(1, new Util().getMd5(newPassword));
+                            preparedStatement.setString(2, login);
+                            preparedStatement.setString(3, user.getPassword());
+                            preparedStatement.executeUpdate();
+                            System.out.println("Password changed succesfully");
+                            connection.close();
+                            return true;
+                        } else {
+                            System.out.println("New password misspelled in one case");
+                            connection.close();
+                            return false;
+                        }
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+    //todo public List<Message> getMyMessages(String login, String password), public void deleteAllMyMessages(String login, String password)
 }
