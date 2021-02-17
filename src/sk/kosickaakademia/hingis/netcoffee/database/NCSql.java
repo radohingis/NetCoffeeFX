@@ -1,13 +1,15 @@
 package sk.kosickaakademia.hingis.netcoffee.database;
 
-import com.mysql.cj.protocol.Resultset;
+
+import sk.kosickaakademia.hingis.netcoffee.entity.Message;
 import sk.kosickaakademia.hingis.netcoffee.entity.User;
 import sk.kosickaakademia.hingis.netcoffee.utility.Util;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class NCSql {
@@ -15,7 +17,9 @@ public class NCSql {
     private final String loginUserQuery = "select * from user where login like ? and password like ?";
     private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
     private final String findUserQuery = "select id from user where login like ?";
-    private final String insertNewMessage = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
+    private final String insertNewMessageQuery = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
+    private final String getMyMessagesQuery = "select * from message where toUser=?";
+    private final String getUserNameQuery = "select login from user where id=?";
 
     public Connection connect() {
         Connection connection;
@@ -150,7 +154,7 @@ public class NCSql {
         int receiverId = getUserId(to);
 
         try (Connection connection = connect()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(insertNewMessage);
+            PreparedStatement preparedStatement = connection.prepareStatement(insertNewMessageQuery);
             preparedStatement.setInt(1, from);
             preparedStatement.setInt(2, receiverId);
             preparedStatement.setString(3, msg);
@@ -166,8 +170,45 @@ public class NCSql {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return false;
     }
-    //todo public List<Message> getMyMessages(String login, String password), public void deleteAllMyMessages(String login, String password)
+
+    public List<Message> getMyMessages(String login){
+
+        List<Message> myMessages = new ArrayList<>();
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(getMyMessagesQuery);
+            preparedStatement.setInt(1, getUserId(login));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String from = getUserName(resultSet.getInt("fromUser"));
+                String to = getUserName(resultSet.getInt("toUser"));
+                Date date = resultSet.getDate("dt");
+                String msg = resultSet.getString("text");
+                myMessages.add(new Message(id, from, to, date, msg));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getUserName(int id) {
+        if(id < 1) return "";
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(getUserNameQuery);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getString("login");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return "";
+    }
+    //todo public void deleteAllMyMessages(String login, String password)
 }

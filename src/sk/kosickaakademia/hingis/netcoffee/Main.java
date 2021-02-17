@@ -22,6 +22,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         NCSql dat = new NCSql();
-        dat.sendMessage(17, "kristianS", "welcome to the land of never-ending suffer");
+        dat.getMyMessages("kristianS");
     }
 }
