@@ -4,6 +4,7 @@ import com.mysql.cj.protocol.Resultset;
 import sk.kosickaakademia.hingis.netcoffee.entity.User;
 import sk.kosickaakademia.hingis.netcoffee.utility.Util;
 
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -13,6 +14,7 @@ public class NCSql {
     private final String insertUserQuery = "insert into user (login, password) values (?, ?)";
     private final String loginUserQuery = "select * from user where login like ? and password like ?";
     private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
+    private final String findUserQuery = "select id from user where login like ?";
 
     public Connection connect() {
         Connection connection;
@@ -124,5 +126,28 @@ public class NCSql {
         }
         return false;
     }
+    public int getUserId(String login) {
+        if(login.equals("")) return -1;
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(findUserQuery);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                System.out.println(resultSet.getInt("id"));
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+
+
+//    public boolean sendMessage(int from, String to, String msg) {
+//        if(from == null || to.equals("") || msg.equals("")) return false;
+//
+//        return false;
+//    }
     //todo public List<Message> getMyMessages(String login, String password), public void deleteAllMyMessages(String login, String password)
 }
