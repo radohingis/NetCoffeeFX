@@ -189,6 +189,7 @@ public class NCSql {
                 String msg = resultSet.getString("text");
                 myMessages.add(new Message(id, from, to, date, msg));
             }
+            return myMessages;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
