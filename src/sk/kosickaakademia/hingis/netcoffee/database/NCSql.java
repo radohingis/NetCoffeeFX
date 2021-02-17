@@ -15,6 +15,7 @@ public class NCSql {
     private final String loginUserQuery = "select * from user where login like ? and password like ?";
     private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
     private final String findUserQuery = "select id from user where login like ?";
+    private final String insertNewMessage = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
 
     public Connection connect() {
         Connection connection;
@@ -144,10 +145,29 @@ public class NCSql {
     }
 
 
-//    public boolean sendMessage(int from, String to, String msg) {
-//        if(from == null || to.equals("") || msg.equals("")) return false;
-//
-//        return false;
-//    }
+    public boolean sendMessage(int from, String to, String msg) {
+        if(to.equals("") || msg.equals("")) return false;
+        int receiverId = getUserId(to);
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertNewMessage);
+            preparedStatement.setInt(1, from);
+            preparedStatement.setInt(2, receiverId);
+            preparedStatement.setString(3, msg);
+            int result = preparedStatement.executeUpdate();
+            if(result == 0){
+                System.out.println("Failed to send message");
+                return false;
+            }
+            if(result > 0){
+                System.out.println("Goddamn worked");
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
     //todo public List<Message> getMyMessages(String login, String password), public void deleteAllMyMessages(String login, String password)
 }
