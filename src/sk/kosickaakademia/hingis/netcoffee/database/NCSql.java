@@ -20,6 +20,7 @@ public class NCSql {
     private final String insertNewMessageQuery = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
     private final String getMyMessagesQuery = "select * from message where toUser=?";
     private final String getUserNameQuery = "select login from user where id=?";
+    private final String deleteMyMessagesQuery = "delete from message where toUser=?";
 
     public Connection connect() {
         Connection connection;
@@ -210,6 +211,20 @@ public class NCSql {
             throwables.printStackTrace();
         }
         return "";
+    }
+
+    private boolean deleteAllMyMessages(String login) {
+        if(login.equals("")) return false;
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteMyMessagesQuery);
+            preparedStatement.setInt(1, getUserId(login));
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
     //todo public void deleteAllMyMessages(String login, String password)
 }
