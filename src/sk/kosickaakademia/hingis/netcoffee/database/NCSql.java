@@ -61,7 +61,7 @@ public class NCSql {
                     connection.close();
                     return false;
                 } else {
-                    System.out.println("You successfully logged in " + login);
+                    System.out.println(login + "signed up succesfully");
                     connection.close();
                     return true;
                 }
