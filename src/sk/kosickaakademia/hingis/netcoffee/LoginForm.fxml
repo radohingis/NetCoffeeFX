@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.Controller">
+   <opaqueInsets>
+      <Insets/>
+   </opaqueInsets>
+   <Button layoutX="72.0" layoutY="267.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="156.0"
+           style="-fx-background-color: #2b1e00; -fx-border-radius: 4;" text="Sign In" textFill="#dddddd">
+      <font>
+         <Font name="SansSerif Bold" size="24.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Button fx:id="sign_up_button" layoutX="72.0" layoutY="185.0" mnemonicParsing="false" onAction="#openSignUpForm"
+           prefHeight="60.0" prefWidth="156.0"
+           style="-fx-border-color: #2b1e00; -fx-border-width: 2; -fx-border-radius: 4; -fx-background-color: transparent;"
+           text="Sign Up" textFill="#2b1e00">
+      <font>
+         <Font name="SansSerif Bold" size="24.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Text fill="#291c00" fontSmoothingType="LCD" layoutX="430.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="enjoy your little talks">
+      <font>
+         <Font name="Droid Sans" size="16.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="269.0" fitWidth="326.0" layoutX="275.0" layoutY="66.0" pickOnBounds="true"
+              preserveRatio="true">
+      <image>
+         <Image url="@assets/coffee-312521_640.png"/>
+      </image>
+   </ImageView>
+   <Text layoutX="55.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NetCoffe">
+      <font>
+         <Font name="Droid Sans Bold" size="72.0"/>
+      </font>
+      <fill>
+         <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.15000000596046448" green="0.10000000149011612" opacity="0.5"/>
+                  </color>
+               </Stop>
+               <Stop offset="0.5747126436781609">
+                  <color>
+                     <Color red="0.16862745583057404" green="0.11764705926179886"/>
+                  </color>
+               </Stop>
+               <Stop offset="0.8697318007662834">
+                  <color>
+                     <Color red="0.15000000596046448" green="0.10249999910593033" opacity="0.0"/>
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.15000000596046448" green="0.10000000149011612" opacity="0.678260862827301"/>
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </fill>
+   </Text>
+</Pane>
