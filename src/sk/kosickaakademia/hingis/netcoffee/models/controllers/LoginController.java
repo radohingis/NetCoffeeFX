@@ -36,6 +36,7 @@ public class LoginController extends SignUpFormController {
         AppController appController  = loader.getController();
         appController.setUser(user);
         appController.greeting();
+        appController.showUsers(user);
         appController.receiverNick.requestFocus();
         main.setScene(appView);
     }

@@ -1,9 +1,9 @@
 package sk.kosickaakademia.hingis.netcoffee.models.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import sk.kosickaakademia.hingis.netcoffee.models.database.NCSql;
 import sk.kosickaakademia.hingis.netcoffee.models.entity.Message;
 import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
@@ -55,5 +55,18 @@ public class AppController {
             String msg = message.getText();
             my_messages.getItems().add(0, dt + " > " + from + " : \"" + msg + "\"");
         }
+    }
+
+    public void showUsers(User user){
+        NCSql dat = new NCSql();
+        List<String> nicks = dat.showUsers(user.getName());
+        for(String nick : nicks) {
+            users.getItems().add(0, nick);
+        }
+    }
+
+    public void setReceiver(MouseEvent mouseEvent) {
+        String receiver = users.getSelectionModel().getSelectedItem().toString();
+        receiverNick.setText(receiver);
     }
 }
