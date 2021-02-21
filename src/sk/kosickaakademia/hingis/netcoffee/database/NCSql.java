@@ -79,6 +79,7 @@ public class NCSql {
             return null;
 
         String hashedPwd = new Util().getMd5(password);
+        User user = null;
 
         try (Connection connection = connect()) {
             if (connection != null) {
@@ -88,7 +89,9 @@ public class NCSql {
                 ResultSet resultset = preparedStatement.executeQuery();
                 if (resultset.next()) {
                     int userID = resultset.getInt("id");
-                    return new User(userID, login, hashedPwd);
+                    user = new User(userID, login, hashedPwd);
+                    System.out.println("Success");
+                    return user;
                 } else {
                     System.out.println("Wrong login or password");
                     return null;

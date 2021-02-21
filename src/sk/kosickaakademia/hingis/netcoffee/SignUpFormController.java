@@ -28,7 +28,7 @@ public class SignUpFormController {
     public void submitUser(ActionEvent actionEvent) throws IOException {
         NCSql dat = new NCSql();
         if(communityAgreement.isSelected()){
-            dat.insertNewUser(usernameVal.getText(), passwordVal.getText());
+            dat.insertNewUser(usernameVal.getText().trim(), passwordVal.getText().trim());
             backToHome(actionEvent);
         }
     }

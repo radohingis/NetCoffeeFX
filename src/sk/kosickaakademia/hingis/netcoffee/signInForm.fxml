@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.SignUpFormController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.AppController">
    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHome" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2b1e00; -fx-border-radius: 4; -fx-border-width: 4; -fx-border-color: #3c2a00; -fx-border-style: hidden hidden solid solid;" textFill="WHITE">
       <graphic>
          <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -24,17 +24,17 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Text fill="#2b1e00" layoutX="260.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Join NetCoffee Community ">
+   <Text fill="#2b1e00" layoutX="260.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Come in, we have NetCoffee">
       <font>
          <Font name="Droid Sans Bold" size="24.0" />
       </font>
    </Text>
-   <Text fill="#2b1e00" layoutX="30.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How should we call you?">
+   <Text fill="#2b1e00" layoutX="30.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick">
       <font>
          <Font name="Droid Sans Bold" size="23.0" />
       </font>
    </Text>
-   <TextField fx:id="usernameVal" layoutX="30.0" layoutY="131.0" prefHeight="40.0" prefWidth="170.0" promptText="Your cutie-pie nick">
+   <TextField fx:id="usernameVal" layoutX="30.0" layoutY="171.0" prefHeight="40.0" prefWidth="170.0" promptText="Your cutie-pie nick">
       <padding>
          <Insets bottom="4.0" left="16.0" right="16.0" top="4.0" />
       </padding>
@@ -42,22 +42,22 @@
          <Font name="Droid Sans" size="12.0" />
       </font>
    </TextField>
-   <Text fill="#2b1e00" layoutX="30.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your biggest secret here">
+   <Text fill="#2b1e00" layoutX="30.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
       <font>
          <Font name="Droid Sans Bold" size="23.0" />
       </font>
    </Text>
-   <PasswordField fx:id="passwordVal" layoutX="30.0" layoutY="229.0" prefHeight="40.0" prefWidth="170.0" promptText="Not your favorite coffee pls">
+   <PasswordField fx:id="passwordVal" layoutX="30.0" layoutY="282.0" prefHeight="40.0" prefWidth="170.0" promptText="Your dude-ass password">
       <font>
          <Font name="Droid Sans" size="12.0" />
       </font>
    </PasswordField>
-   <ImageView fitHeight="252.0" fitWidth="257.0" layoutX="329.0" layoutY="171.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@assets/coffee-312521_640.png"/>
+   <ImageView fitHeight="252.0" fitWidth="257.0" layoutX="329.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@assets/coffee-312521_640.png" />
+      </image>
    </ImageView>
-   <CheckBox fx:id="communityAgreement" layoutX="37.0" layoutY="296.0" mnemonicParsing="false" text="I agree with community rules" textFill="#2b1e00" />
-   <Button layoutX="30.0" layoutY="343.0" mnemonicParsing="false" onAction="#submitUser" prefHeight="33.0" prefWidth="170.0" style="-fx-background-color: #2b1e00;" text="LET ME IN" textFill="#dddddd">
+   <Button layoutX="30.0" layoutY="343.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="33.0" prefWidth="170.0" style="-fx-background-color: #2b1e00;" text="I NEED COFFEE" textFill="#dddddd">
       <font>
          <Font name="Droid Sans Bold" size="18.0" />
       </font>

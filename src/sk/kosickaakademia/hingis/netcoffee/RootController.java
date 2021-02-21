@@ -6,11 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.w3c.dom.Node;
 
 import java.io.IOException;
 
-public class MainSceneController {
+public class RootController {
     public Button sign_up_button;
     public Button sign_in_button;
 
@@ -21,7 +20,11 @@ public class MainSceneController {
         main.setScene(signUpForm);
     }
 
-    public void openSignInForm(ActionEvent actionEvent) {
-
+    public void openSignInForm(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("./signInForm.fxml"));
+        Scene signInForm = new Scene(root);
+        Stage main = Main.main;
+        main.setScene(signInForm);
     }
 }
+
