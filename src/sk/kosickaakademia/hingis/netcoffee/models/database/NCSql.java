@@ -18,7 +18,7 @@ public class NCSql {
     private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
     private final String findUserQuery = "select id from user where login like ?";
     private final String insertNewMessageQuery = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
-    private final String getMyMessagesQuery = "select * from message where toUser=? and fromUser=?";
+    private final String getMyMessagesQuery = "select * from message where (toUser=? and fromUser=?) or (toUser=? and fromUser=?)";
     private final String getUserNameQuery = "select login from user where id=?";
     private final String deleteMyMessagesQuery = "delete from message where toUser=?";
     private final String showUsersQuery = "select * from user where not login =?";
@@ -185,6 +185,8 @@ public class NCSql {
             PreparedStatement preparedStatement = connection.prepareStatement(getMyMessagesQuery);
             preparedStatement.setInt(1, getUserId(login));
             preparedStatement.setInt(2, getUserId(friend));
+            preparedStatement.setInt(3, getUserId(friend));
+            preparedStatement.setInt(4, getUserId(login));
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 int id = resultSet.getInt("id");
@@ -192,7 +194,9 @@ public class NCSql {
                 String to = getUserName(resultSet.getInt("toUser"));
                 Date date = resultSet.getDate("dt");
                 String msg = resultSet.getString("text");
-                myMessages.add(new Message(id, from, to, date, msg));
+                Message message = new Message(id, from, to, date, msg);
+                myMessages.add(message);
+                System.out.println(message.getText());
             }
             return myMessages;
         } catch (SQLException throwables) {

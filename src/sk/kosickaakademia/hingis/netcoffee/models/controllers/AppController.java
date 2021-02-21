@@ -1,18 +1,23 @@
 package sk.kosickaakademia.hingis.netcoffee.models.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import sk.kosickaakademia.hingis.netcoffee.models.database.NCSql;
+import sk.kosickaakademia.hingis.netcoffee.models.entity.Message;
 import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
+
+import java.util.Date;
+import java.util.List;
 
 public class AppController {
     public Label username;
     public TextArea actual_message;
     public Button send_msg_button;
     public TextField receiverNick;
+    public ListView users;
+    public ListView my_messages;
     private User user;
 
     public void setUser(User user) {
@@ -31,11 +36,24 @@ public class AppController {
         String msg = actual_message.getText().trim();
         dat.sendMessage(from, to, msg);
         actual_message.setText("");
+        showMessages();
     }
 
-//    public void showMessages(){
-//        NCSql dat = new NCSql();
-//        String login = user.getName();
-//        String friendsLogin = receiverNick.getText();
-//    }
+    public void showMessages(){
+        NCSql dat = new NCSql();
+        String login = user.getName();
+        String friendsLogin = receiverNick.getText();
+        List<Message> objectMessages = dat.getMyMessages(login, friendsLogin);
+        if(objectMessages.isEmpty()){
+            String noMsgs = "";
+            my_messages.getItems().add(0, noMsgs);
+        }
+        my_messages.getItems().clear();
+        for(Message message : objectMessages){
+            Date dt = message.getDate();
+            String from = message.getFrom();
+            String msg = message.getText();
+            my_messages.getItems().add(0, dt + " > " + from + " : \"" + msg + "\"");
+        }
+    }
 }
