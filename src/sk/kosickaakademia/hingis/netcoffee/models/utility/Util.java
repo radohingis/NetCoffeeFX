@@ -1,4 +1,4 @@
-package sk.kosickaakademia.hingis.netcoffee.utility;
+package sk.kosickaakademia.hingis.netcoffee.models.utility;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

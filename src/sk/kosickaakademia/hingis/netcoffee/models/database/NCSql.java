@@ -1,9 +1,9 @@
-package sk.kosickaakademia.hingis.netcoffee.database;
+package sk.kosickaakademia.hingis.netcoffee.models.database;
 
 
-import sk.kosickaakademia.hingis.netcoffee.entity.Message;
-import sk.kosickaakademia.hingis.netcoffee.entity.User;
-import sk.kosickaakademia.hingis.netcoffee.utility.Util;
+import sk.kosickaakademia.hingis.netcoffee.models.entity.Message;
+import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
+import sk.kosickaakademia.hingis.netcoffee.models.utility.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,9 +18,10 @@ public class NCSql {
     private final String updatePasswordQuery = "update user set password = ? where login = ? and password = ?";
     private final String findUserQuery = "select id from user where login like ?";
     private final String insertNewMessageQuery = "insert into message (fromUser, toUser, text) values (?, ?, ?)";
-    private final String getMyMessagesQuery = "select * from message where toUser=?";
+    private final String getMyMessagesQuery = "select * from message where toUser=? and fromUser=?";
     private final String getUserNameQuery = "select login from user where id=?";
     private final String deleteMyMessagesQuery = "delete from message where toUser=?";
+    private final String showUsersQuery = "select * from user where not login =?";
 
     public Connection connect() {
         Connection connection;
@@ -90,7 +91,6 @@ public class NCSql {
                 if (resultset.next()) {
                     int userID = resultset.getInt("id");
                     user = new User(userID, login, hashedPwd);
-                    System.out.println("Success");
                     return user;
                 } else {
                     System.out.println("Wrong login or password");
@@ -177,13 +177,14 @@ public class NCSql {
         return false;
     }
 
-    public List<Message> getMyMessages(String login){
+    public List<Message> getMyMessages(String login, String friend){
 
         List<Message> myMessages = new ArrayList<>();
 
         try (Connection connection = connect()) {
             PreparedStatement preparedStatement = connection.prepareStatement(getMyMessagesQuery);
             preparedStatement.setInt(1, getUserId(login));
+            preparedStatement.setInt(2, getUserId(friend));
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 int id = resultSet.getInt("id");
@@ -228,6 +229,22 @@ public class NCSql {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    public List<String> showUsers(String login){
+        List<String> users = new ArrayList<>();
+
+        try (Connection connection = connect()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(showUsersQuery);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                users.add(resultSet.getString("login"));
+            }
+         } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
     //todo public void deleteAllMyMessages(String login, String password)
 }

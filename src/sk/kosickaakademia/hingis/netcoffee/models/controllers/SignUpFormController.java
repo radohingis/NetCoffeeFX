@@ -1,4 +1,4 @@
-package sk.kosickaakademia.hingis.netcoffee;
+package sk.kosickaakademia.hingis.netcoffee.models.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sk.kosickaakademia.hingis.netcoffee.database.NCSql;
+import sk.kosickaakademia.hingis.netcoffee.Main;
+import sk.kosickaakademia.hingis.netcoffee.models.database.NCSql;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package sk.kosickaakademia.hingis.netcoffee.entity;
+package sk.kosickaakademia.hingis.netcoffee.models.entity;
 
 import java.sql.Date;
 

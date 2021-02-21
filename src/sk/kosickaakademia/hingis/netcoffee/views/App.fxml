@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.models.controllers.AppController">
+   <Pane prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #2b1e00;">
+      <Label layoutX="14.0" layoutY="10.0" text="Welcome," textFill="#dddddd">
+         <font>
+            <Font name="Droid Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="username" layoutX="108.0" layoutY="10.0" text="username" textFill="#dddddd">
+         <font>
+            <Font name="Droid Sans Bold" size="18.0" />
+         </font>
+      </Label>
+   </Pane>
+   <ListView fx:id="my_messages" layoutX="22.0" layoutY="58.0" prefHeight="260.0" prefWidth="388.0" style="-fx-background-color: #dddddd;">
+      <padding>
+         <Insets bottom="8.0" left="8.0" right="8.0" top="25.0" />
+      </padding></ListView>
+   <TextArea fx:id="actual_message" layoutX="22.0" layoutY="332.0" prefHeight="48.0" prefWidth="319.0">
+      <font>
+         <Font name="Droid Sans" size="14.0" />
+      </font>
+   </TextArea>
+   <Button fx:id="send_msg_button" layoutX="349.0" layoutY="332.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="48.0" prefWidth="61.0" style="-fx-background-color: #2b1e00;">
+      <graphic>
+         <ImageView cache="true" fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@../assets/send-icon.png" />
+         </ImageView>
+      </graphic>
+   </Button>
+   <ListView fx:id="users" layoutX="429.0" layoutY="50.0" prefHeight="330.0" prefWidth="155.0" style="-fx-background-color: #dddddd;" />
+   <Pane layoutX="16.0" layoutY="51.0" prefHeight="60.0" prefWidth="401.0" style="-fx-background-color: #2b1e00;">
+      <TextField fx:id="receiverNick" alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="33.0" prefWidth="155.0" promptText="Receiver nick" style="-fx-background-color: #dddddd; -fx-border-width: 2; -fx-border-color: #dddddd;">
+         <font>
+            <Font name="Droid Sans" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <Button layoutX="183.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="104.0" style="-fx-background-color: transparent; -fx-border-width: 2; -fx-border-color: #dddddd;" text="SHOW CONVO" textFill="#dddddd">
+         <font>
+            <Font name="Droid Sans Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </Pane>
+</Pane>

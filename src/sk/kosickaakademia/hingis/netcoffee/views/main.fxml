@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.RootController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f09d00;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.kosickaakademia.hingis.netcoffee.models.controllers.RootController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
@@ -35,7 +35,7 @@
    </Text>
    <ImageView fitHeight="269.0" fitWidth="326.0" layoutX="275.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@assets/coffee-312521_640.png" />
+         <Image url="@../assets/coffee-312521_640.png" />
       </image>
    </ImageView>
    <Text layoutX="55.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NetCoffe">
