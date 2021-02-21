@@ -13,7 +13,7 @@ import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
 
 import java.io.IOException;
 
-public class LoginController extends SignUpFormController {
+public class LoginController extends GlobalController {
     public PasswordField passwordVal;
     public TextField usernameVal;
     public Button sign_in_btn;

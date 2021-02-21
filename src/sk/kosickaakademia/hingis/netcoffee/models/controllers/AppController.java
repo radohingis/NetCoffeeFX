@@ -3,7 +3,6 @@ package sk.kosickaakademia.hingis.netcoffee.models.controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.PickResult;
 import sk.kosickaakademia.hingis.netcoffee.models.database.NCSql;
 import sk.kosickaakademia.hingis.netcoffee.models.entity.Message;
 import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
@@ -11,7 +10,7 @@ import sk.kosickaakademia.hingis.netcoffee.models.entity.User;
 import java.util.Date;
 import java.util.List;
 
-public class AppController {
+public class AppController extends GlobalController {
     public Label username;
     public TextArea actual_message;
     public Button send_msg_button;
