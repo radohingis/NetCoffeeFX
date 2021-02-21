@@ -1,4 +1,4 @@
-package sk.kosickaakademia.hingis.netcoffee.models.controllers;
+package sk.kosickaakademia.hingis.netcoffee.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,14 +15,14 @@ public class RootController {
     public Button sign_in_button;
 
     public void openSignUpForm(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../views/signUpForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../views/signUpForm.fxml"));
         Scene signUpForm = new Scene(root);
         Stage main = Main.main;
         main.setScene(signUpForm);
     }
 
     public void openSignInForm(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../views/signInForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../views/signInForm.fxml"));
         Scene signInForm = new Scene(root);
         Stage main = Main.main;
         main.setScene(signInForm);

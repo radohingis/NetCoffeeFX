@@ -1,7 +1,6 @@
-package sk.kosickaakademia.hingis.netcoffee.models.controllers;
+package sk.kosickaakademia.hingis.netcoffee.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +28,7 @@ public class LoginController extends GlobalController {
 
     private void openApp(User user) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../../views/App.fxml"));
+        loader.setLocation(getClass().getResource("../views/App.fxml"));
         Parent root = loader.load();
         Scene appView = new Scene(root);
         Stage main = Main.main;

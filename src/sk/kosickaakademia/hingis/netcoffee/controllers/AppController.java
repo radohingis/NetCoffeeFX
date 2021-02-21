@@ -1,4 +1,4 @@
-package sk.kosickaakademia.hingis.netcoffee.models.controllers;
+package sk.kosickaakademia.hingis.netcoffee.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
